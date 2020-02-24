@@ -21,13 +21,13 @@ export default createMuiTheme({
       fontFamily: "Ubuntu",
       textTransform: "none",
       fontWeight: 700,
-      fontSize: ".8rem",
+      fontSize: "0.5 rem"
     },
     deploy: {
       fontFamily: "Ubuntu",
       textTransform: "none",
       fontWeight: 700,
-      fontSize: "1rem",
+      fontSize: "1 rem",
       color: "white",
     }
   }
