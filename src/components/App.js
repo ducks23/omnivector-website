@@ -4,12 +4,12 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./ui/header/Header";
 import theme from "./ui/theme/Theme";
 import Service from "./ui/service/Service";
-import { serviceRoutsConfig } from "../assets/configData/serviceRoutesConfig"
+import { serviceRoutesConfig } from "../assets/configData/serviceRoutesConfig"
 
 function App() {
 
 
-  const serviceRoutes = serviceRoutsConfig.map(service => (
+  const serviceRoutes = serviceRoutesConfig.map(service => (
     <Route
       exact
       path={service.path}
@@ -19,6 +19,7 @@ function App() {
           serviceImage={service.serviceImage}
           serviceTitle={service.serviceTitle}
           serviceText={service.serviceText}
+          cardData={service.cardData}
         />
       )}
     />

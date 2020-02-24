@@ -1,52 +1,27 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, {Fragment} from 'react';
+import classes from './ServiceCard.module.css'
+import { Helmet } from "react-helmet";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 450,
-    height: 500,
-    margin: "8px"
-  },
-});
-
-export default function ImgMediaCard() {
-  const classes = useStyles();
-
+const ServiceCard = (props) => {
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-  );
+    <div className={classes.Card}>
+      <div className={classes.CardHeader}>
+        <h4>{props.title}</h4>
+        <p>{props.description}</p>
+      </div>
+      <div>
+        <Helmet>
+          <script type="text/javascript" src="https://assets.ubuntu.com/v1/juju-cards-v1.7.2.js"></script>
+          <script>
+            {`
+              console.log('Test', typeof $);
+            `}
+          </script>
+        </Helmet>
+        <div class="juju-card" data-id={props.dataId} data-dd ></div>
+      </div>
+    </div>
+  )
 }
+
+export default ServiceCard;
