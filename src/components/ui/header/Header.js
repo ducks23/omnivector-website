@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import logo from "../../../assets/OVLogoHoriz2color.svg";
+import logo from "../../../assets/images/OVLogoHoriz2color.svg";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -49,7 +49,8 @@ const useStyles = makeStyles(theme => ({
   },
   deploy: {
     ...theme.typography.deploy,
-    borderRadius: "50px",
+    borderRadius: "8px",
+    width: "100px",
     backgroundColor: theme.palette.primary.main,
     margin: "0 30px 20px 20px ",
   },
