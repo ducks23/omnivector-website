@@ -1,5 +1,4 @@
-import React, {Fragment} from 'react';
-// import classes from './ServiceCard.module.css'
+import React, {useEffect} from 'react';
 import { Helmet } from "react-helmet";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
@@ -45,6 +44,11 @@ const useStyles = makeStyles(theme => ({
 
 const ServiceCard = (props) => {
   const classes = useStyles();
+
+  useEffect(() => {
+       "https://assets.ubuntu.com/v1/juju-cards-v1.7.2.js"
+  },[props.title])
+
   return (
     <div className={classes.card}>
       <div >
@@ -52,14 +56,6 @@ const ServiceCard = (props) => {
         <p className={classes.headerDescription}>{props.description}</p>
       </div>
       <div>
-        <Helmet>
-          <script type="text/javascript" src="https://assets.ubuntu.com/v1/juju-cards-v1.7.2.js"></script>
-          <script>
-            {`
-              console.log('Test', typeof $);
-            `}
-          </script>
-        </Helmet>
         <div class="juju-card" data-id={props.dataId} data-dd ></div>
       </div>
       <div className={classes.footer}>
