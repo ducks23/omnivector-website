@@ -7,6 +7,7 @@ import ServiceCard from "./serviceCard/ServiceCard";
 const Service = props => {
   const serviceCards = props.cardData.map(card => (
     <ServiceCard
+      key={card.cardDataId}
       dataId={card.cardDataId}
       title={card.cardTitle}
       description={card.cardDescription}

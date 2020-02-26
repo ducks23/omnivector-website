@@ -7,7 +7,7 @@ import batchImage from "../images/batch.jpg";
 import devopsImage from "../images/devops.jpg";
 import loggingImage from "../images/logging.jpg";
 
-export const serviceRoutesConfig = [
+export const configServiceRoutes = [
   { path: "/big-data",
     serviceName: "Big Data",
     serviceImage: `${bigDataImage}`,

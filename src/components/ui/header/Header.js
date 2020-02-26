@@ -13,6 +13,18 @@ import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import IconButton from "@material-ui/core/IconButton";
+import ContactMailIcon from "@material-ui/icons/ContactMail";
+import InfoIcon from "@material-ui/icons/Info";
+import HomeIcon from "@material-ui/icons/Home";
+import MenuIcon from "@material-ui/icons/Menu";
+import CodeIcon from "@material-ui/icons/Code";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 
 import logo from "../../../assets/images/OVLogoHoriz2color.svg";
 
@@ -32,33 +44,43 @@ const useStyles = makeStyles(theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     height: "7.5em",
-    [theme.breakpoints.down("md")] : {
+    [theme.breakpoints.down("md")]: {
       height: "4.5em"
     },
-    [theme.breakpoints.down("xs")] : {
+    [theme.breakpoints.down("xs")]: {
       height: 0
     }
   },
   toolbar: {
     backgroundColor: "black",
     height: "120px",
-    [theme.breakpoints.down("md")] : {
+    [theme.breakpoints.down("md")]: {
       height: "80px"
     },
-    [theme.breakpoints.down("xs")] : {
+    [theme.breakpoints.down("xs")]: {
+      height: "60px"
+    }
+  },
+  toolbarTransparent: {
+    backgroundColor: "transparent",
+    height: "120px",
+    [theme.breakpoints.down("md")]: {
+      height: "80px"
+    },
+    [theme.breakpoints.down("xs")]: {
       height: "60px"
     }
   },
   logo: {
     height: "6em",
     margin: "8px",
-    [theme.breakpoints.down("md")] : {
+    [theme.breakpoints.down("md")]: {
       height: "4em",
-      margin: "4px",
+      margin: "4px"
     },
-    [theme.breakpoints.down("xs")] : {
+    [theme.breakpoints.down("xs")]: {
       height: "3em",
-      margin: "2px",
+      margin: "2px"
     }
   },
   tab: {
@@ -85,10 +107,51 @@ const useStyles = makeStyles(theme => ({
   },
   menuItem: {
     ...theme.typography.tab,
-    opacity: 0.7,
+    opacity: 0.5,
     "&:hover": {
       opacity: 1
     }
+  },
+  hamburger: {
+    color: "white",
+    height: "30px",
+    width: "30px",
+    marginRight: "8px"
+  },
+  drawerIconContainer: {
+    marginLeft: "auto",
+    "&:hover": {
+      backgroundColor: "transparent"
+    }
+  },
+  drawer: {
+    backgroundColor: "black",
+    width: "20vw",
+    [theme.breakpoints.down("xs")]: {
+      width: "40vw"
+    }
+  },
+  listItem: {
+    ...theme.typography.tab,
+    display: "flex",
+    justifyContent: "left",
+    textAlign: "left",
+    margin: "auto",
+    color: "white",
+    opacity: 0.5,
+    marginLeft: "auto"
+  },
+  selectedItem: {
+    color: theme.palette.secondary.dark,
+    opacity: 1
+  },
+  appBar: {
+    zIndex: theme.zIndex.modal + 1,
+    backgroundColor: "transparent"
+  },
+  divider: {
+    backgroundColor: theme.palette.primary.light,
+    opacity: 0.7
   }
 }));
 
@@ -96,64 +159,110 @@ export default function Header(props) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  const [selectedTab, setSelectedTab] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const handleChange = (event, newValue) => {
-    setSelectedTab(newValue);
+    props.setSelectedValue(newValue);
+  };
+
+  const handleMenuItemClick = (event, index) => {
+    setAnchorEl(null);
+    props.setSelectedValue(1);
+    setOpenMenu(false);
+    props.setSelectedIndex(index);
   };
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
-    setOpen(true);
+    setOpenMenu(true);
   };
 
   const handleClose = event => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenMenu(false);
   };
 
-  useEffect(() => {
-    if (window.location.pathname === "/" && selectedTab === false) {
-      setSelectedTab(0);
-    } else if (window.location.pathname === "/home" && selectedTab !== 0) {
-      setSelectedTab(0);
-    } else if (window.location.pathname === "/services" && selectedTab !== 1) {
-      setSelectedTab(1);
-    } else if (window.location.pathname === "/about-us" && selectedTab !== 2) {
-      setSelectedTab(2);
-    } else if (
-      window.location.pathname === "/contact-us" &&
-      selectedTab !== 3
-    ) {
-      setSelectedTab(3);
+  const mainRoutes = [
+    { name: "Home", link: "/", activeIndex: 0, icon: <HomeIcon /> },
+    {
+      name: "Services",
+      link: "/services",
+      activeIndex: 1,
+      ariaOwns: anchorEl ? "simple-menu" : undefined,
+      ariaPopup: anchorEl ? "true" : undefined,
+      mouseOver: event => handleClick(event),
+      icon: <CodeIcon />
+    },
+    { name: "About Us", link: "/about", activeIndex: 2, icon: <InfoIcon /> },
+    {
+      name: "Contact Us",
+      link: "/contact",
+      activeIndex: 3,
+      icon: <ContactMailIcon />
     }
-  }, [selectedTab]);
-
-  const menuOptions = [
-    { to: "/big-data", label: "Big Data" },
-    { to: "/hpc", label: "HPC" },
-    { to: "/elasticsearch", label: "Elasticsearch" },
-    { to: "/redis", label: "Redis" },
-    { to: "/ceph", label: "Ceph" },
-    { to: "/batch-enrichment", label: "Batch Enrichment" },
-    { to: "/devops", label: "DevOps" },
-    { to: "/logging", label: "Logging" }
   ];
 
-  const menuItems = menuOptions.map(item => (
+  const menuOptions = [
+    { to: "/services", label: "Services", activeIndex: 1, selectedIndex: 0 },
+    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 1 },
+    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 2 },
+    {
+      to: "/elasticsearch",
+      label: "Elasticsearch",
+      activeIndex: 1,
+      selectedIndex: 3
+    },
+    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 4 },
+    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 5 },
+    {
+      to: "/batch-enrichment",
+      label: "Batch Enrichment",
+      activeIndex: 1,
+      selectedIndex: 6
+    },
+    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 7 },
+    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 8 }
+  ];
+
+  useEffect(() => {
+    [...menuOptions, ...mainRoutes].forEach(route => {
+      switch (window.location.pathname) {
+        case `${route.string}`:
+          if (props.selectedValue !== route.index) {
+            props.setSelectedValue(route.index);
+            if (
+              route.selectedIndex &&
+              route.selectedIndex !== props.selectedIndex
+            ) {
+              props.setSelectedIndex(route.selectedIndex);
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    });
+  }, [
+    props.selectedValue,
+    menuOptions,
+    props.selectedIndex,
+    mainRoutes,
+    props
+  ]);
+
+  const menuItems = menuOptions.map((item, index) => (
     <MenuItem
       key={item.to}
-      onClick={() => {
-        handleClose();
-        setSelectedTab(1);
-      }}
+      onClick={event => handleMenuItemClick(event, index)}
+      selected={index === props.selectedIndex}
       component={Link}
       to={item.to}
-      classes={{ root: classes.menuItem }}
+      classes={{ root: classes.menuItem, selected: classes.selectedItem }}
     >
       {item.label}
     </MenuItem>
@@ -162,34 +271,24 @@ export default function Header(props) {
   const tabs = (
     <Fragment>
       <Tabs
-        value={selectedTab}
+        value={props.selectedValue}
         onChange={handleChange}
         indicatorColor="secondary"
         variant="fullWidth"
         className={classes.tabContainer}
       >
-        <Tab label="Home" className={classes.tab} component={Link} to="/home" />
-        <Tab
-          aria-owns={anchorEl ? "simple-menu" : undefined}
-          aria-haspopup={anchorEl ? "true" : undefined}
-          label="Services"
-          onMouseOver={event => handleClick(event)}
-          className={classes.tab}
-          component={Link}
-          to="/services"
-        />
-        <Tab
-          label="About Us"
-          className={classes.tab}
-          component={Link}
-          to="/about-us"
-        />
-        <Tab
-          label="Contact Us"
-          className={classes.tab}
-          component={Link}
-          to="/contact-us"
-        />
+        {mainRoutes.map(route => (
+          <Tab
+            key={route.name}
+            aria-owns={route.ariaOwns}
+            aria-haspopup={route.ariaPopup}
+            label={route.name}
+            onMouseOver={route.mouseOver}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+          />
+        ))}
       </Tabs>
       <Button
         className={classes.deploy}
@@ -202,33 +301,88 @@ export default function Header(props) {
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
-        open={open}
+        open={openMenu}
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
         classes={{ paper: classes.menu }}
+        style={{ zIndex: 1302 }}
       >
         {menuItems}
       </Menu>
     </Fragment>
   );
 
+  const drawer = (
+    <Fragment>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onOpen={() => setDrawerOpen(true)}
+        classes={{ paper: classes.drawer }}
+      >
+        <List>
+          <div className={classes.toolbarMargin} />
+          {mainRoutes.map(route => (
+            <Fragment key={route.name}>
+              <ListItem
+                onClick={() => [
+                  setDrawerOpen(false),
+                  props.setSelectedValue(route.activeIndex)
+                ]}
+                button
+                component={Link}
+                to={route.link}
+                className={classes.listItem}
+                selected={props.selectedValue === route.activeIndex}
+                classes={{ selected: classes.selectedItem }}
+              >
+                <ListItemIcon>{route.icon}</ListItemIcon>
+                <ListItemText disableTypography>{route.name}</ListItemText>
+              </ListItem>
+              <Divider variant="middle" classes={{ root: classes.divider }} />
+            </Fragment>
+          ))}
+        </List>
+      </SwipeableDrawer>
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setDrawerOpen(!drawerOpen)}
+        disableRipple
+      >
+        <MenuIcon className={classes.hamburger} />
+      </IconButton>
+    </Fragment>
+  );
+  const currentRoute = window.location.pathname;
+
   return (
     <Fragment>
       <ElevationScroll>
-        <AppBar position="fixed">
-          <Toolbar disableGutters className={classes.toolbar}>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar
+            disableGutters
+            className={
+              currentRoute !== "/"
+                ? classes.toolbar
+                : classes.toolbarTransparent
+            }
+          >
             <Button
-              onClick={() => setSelectedTab(false)}
+              onClick={() => props.setSelectedValue(false)}
               component={Link}
               to="/"
             >
               <img src={logo} alt="OSL" className={classes.logo} />
             </Button>
-            {matches ? null : tabs}
+            {matches ? drawer : tabs}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <div className={classes.toolbarMargin} />
+      <div
+        className={currentRoute !== "/" ? classes.toolbarMargin : undefined}
+      />
     </Fragment>
   );
 }
