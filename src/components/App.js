@@ -7,6 +7,7 @@ import Service from "./ui/service/Service";
 import { configServiceRoutes } from "../assets/configData/configServiceRoutes";
 import Footer from "../components/ui/footer/Footer";
 import Home from "../components/ui/home/Home";
+import About from "../components/ui/about/About";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState(false);
@@ -42,7 +43,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/services" component={() => <div>Services</div>} />
-          <Route exact path="/about-us" component={() => <div>About Us</div>} />
+          <Route exact path="/about" component={About} />
           <Route
             exact
             path="/contact-us"
