@@ -40,7 +40,7 @@ function App() {
           setSelectedValue={setSelectedValue}
         />
         <Switch>
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route exact path="/about-us" component={() => <div>About Us</div>} />
           <Route

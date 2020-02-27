@@ -12,11 +12,13 @@ import prGraphic from "../../../assets/images/people.png";
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
+    width: "100%",
+    display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    width: "75%"
+    justifyContent: "center"
   },
   grid: {
+    width: "65%",
     justifyContent: "center"
   }
 }));
@@ -27,7 +29,7 @@ const Home = () => {
     <div>
       <HomeHeader />
       <div className={classes.gridContainer}>
-        <Grid container direction="row" spacing={6} className={classes.grid}>
+        <Grid container direction="row" spacing={4} className={classes.grid}>
           <Grid item>
             <HomeService
               title="INFRASTRUCTURE AUTOMATION"

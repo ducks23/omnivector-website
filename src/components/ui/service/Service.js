@@ -5,11 +5,14 @@ import ServiceHeader from "./serviceHeader/ServiceHeader";
 import ServiceCard from "./serviceCard/ServiceCard";
 
 const Service = props => {
-  const serviceCards = props.cardData.map(card => (
+  const serviceCards = props.cardData.map((card, index) => (
     <ServiceCard
-      key={card.cardDataId}
+      key={index}
       dataId={card.cardDataId}
       title={card.cardTitle}
+      cardImg={card.cardImg}
+      jaasLink={card.jaasLink}
+      cliCommand={card.cliCommand}
       description={card.cardDescription}
     />
   ));

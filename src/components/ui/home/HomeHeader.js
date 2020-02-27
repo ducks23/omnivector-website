@@ -7,7 +7,7 @@ import headerImg from "../../../assets/images/homepage.jpg";
 const useStyles = makeStyles(theme => ({
   headerContainer: {
     width: "100%",
-    height: "40vw",
+    height: "45vw",
     overflow: "hidden",
     objectFit: "cover",
     objectPosition: "50 -50px"
@@ -30,15 +30,15 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 400,
     textAlign: "center",
     color: "white",
-    margin: "24px",
+    margin: "1vw",
     fontStyle: "italic",
     fontSize: "2vw",
     textShadow: "4px 4px 8px rgba(0, 0, 0, 1)"
   },
   headerTextContainer: {
     position: "absolute",
-    width: "60vw",
-    top: "10vw",
+    width: "65vw",
+    top: "19vw",
     left: "20vw"
   }
 }));

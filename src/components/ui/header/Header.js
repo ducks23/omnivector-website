@@ -62,13 +62,14 @@ const useStyles = makeStyles(theme => ({
     }
   },
   toolbarTransparent: {
-    backgroundColor: "transparent",
+    backgroundColor: "black",
+    opacity: 0.85,
     height: "120px",
     [theme.breakpoints.down("md")]: {
-      height: "80px"
+      height: "70px"
     },
     [theme.breakpoints.down("xs")]: {
-      height: "60px"
+      height: "50px"
     }
   },
   logo: {

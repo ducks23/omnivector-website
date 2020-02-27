@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
-import TextField from "@material-ui/core/TextField";
+import { withRouter } from "react-router-dom";
+import loadJuJuCard from "./loadDynamicScript";
 
 const useStyles = makeStyles(theme => ({
   deploy: {
     ...theme.typography.deploy,
     borderRadius: "8px",
-    backgroundColor: theme.palette.secondary.light,
-    color: "black",
+    backgroundColor: theme.palette.primary.main,
     margin: "0 30px 0 20px "
   },
   card: {
@@ -39,18 +39,17 @@ const useStyles = makeStyles(theme => ({
     ...theme.typography.deploy,
     display: "block",
     margin: "16px 16px"
-  },
-  jujuCard: {
-    margin: "1vw"
-  },
-  img: {
-    width: "28vw",
-    border: "1px solid lightgrey"
   }
 }));
 
 const ServiceCard = props => {
   const classes = useStyles();
+
+  const currentLocation = window.history.location;
+  const lastLocation = props.location.pathname;
+  const src = "https://assets.ubuntu.com/v1/juju-cards-v1.7.2.js";
+
+  loadJuJuCard(src, null);
 
   return (
     <div className={classes.card}>
@@ -58,29 +57,9 @@ const ServiceCard = props => {
         <h4 className={classes.headerTitle}>{props.title}</h4>
         <p className={classes.headerDescription}>{props.description}</p>
       </div>
-      <div className={classes.jujuCard}>
-        <img
-          src={`${props.cardImg}`}
-          alt={props.title}
-          className={classes.img}
-        />
+      <div>
+        <div className="juju-card" data-id={props.dataId} data-dd></div>
       </div>
-      <TextField
-        id="outlined-basic"
-        label="Deploy with CLI"
-        variant="outlined"
-        value={props.cliCommand}
-        className={classes.jujuCard}
-        selected
-      />
-      <Button
-        variant="outlined"
-        color="primary"
-        href={props.jaasLink}
-        className={classes.jujuCard}
-      >
-        Deploy with JAAS
-      </Button>
       <div className={classes.footer}>
         <Button className={classes.deploy} variant="contained">
           Get help with {props.title}...
@@ -90,4 +69,4 @@ const ServiceCard = props => {
   );
 };
 
-export default ServiceCard;
+export default withRouter(ServiceCard);
