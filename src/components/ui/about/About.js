@@ -11,7 +11,14 @@ const useStyles = makeStyles(theme => ({
   body: {
     fontFamily: "Ubuntu",
     width: "50vw",
-    margin: "5vh auto "
+    margin: "4vh auto ",
+    textAlign: "justify",
+    [theme.breakpoints.down("md")]: {
+      width: "75vw"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "85vw"
+    }
   },
   foundersTitle: {
     fontFamily: "Ubuntu",
