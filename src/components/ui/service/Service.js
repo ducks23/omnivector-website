@@ -1,11 +1,26 @@
 import React from "react";
 
-import classes from "./Service.module.css";
 import ServiceHeader from "./serviceHeader/ServiceHeader";
 import ServiceCard from "./serviceCard/ServiceCard";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(theme => ({
+  Service: {
+    width: "100%"
+  },
+  CardContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    margin: "36px auto",
+    textAlign: "center"
+  }
+}));
 
 const Service = props => {
+  const classes = useStyles();
+
   const serviceCards = props.cardData.map((card, index) => (
     <ServiceCard
       key={index}
@@ -25,7 +40,7 @@ const Service = props => {
         serviceImage={props.serviceImage}
         serviceText={props.serviceText}
       />
-      <Grid container className={classes.CardContainer}>
+      <Grid container className={classes.CardContainer} spacing={4}>
         {serviceCards}
       </Grid>
     </div>

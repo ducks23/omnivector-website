@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "white",
     width: "500px",
     borderRadius: "16px",
-    margin: "0 3vw",
+    margin: "12px 36px",
     boxShadow: "4px 4px 8px rgba(0, 0, 0, .5)"
   },
   headerTitle: {
@@ -46,8 +46,11 @@ const useStyles = makeStyles(theme => ({
     margin: "1vw"
   },
   img: {
-    width: "28vw",
+    width: "100%",
     border: "1px solid lightgrey"
+  },
+  footerSpacer: {
+    height: "36px"
   }
 }));
 

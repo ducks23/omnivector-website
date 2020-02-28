@@ -8,7 +8,6 @@ import lfGraphic from "../../../assets/images/lifecycle.png";
 import caGraphic from "../../../assets/images/cloud-agnostic.png";
 import hsGraphic from "../../../assets/images/cloud-archetecture.png";
 import esGraphic from "../../../assets/images/computer-monitoring.png";
-import prGraphic from "../../../assets/images/people.png";
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {

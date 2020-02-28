@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
 import Contact from "../contact/Contact";
 
