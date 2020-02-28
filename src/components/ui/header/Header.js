@@ -286,13 +286,14 @@ export default function Header(props) {
         subjectPrefix=""
         subjectContext=""
         subjectSuffix=""
-        buttonType="header"
+        buttonType="text"
       />
       <Button
         className={classes.deploy}
         variant="contained"
         component={Link}
         to="/deploy"
+        onClick={() => props.setSelectedValue(null)}
       >
         Deploy!
       </Button>

@@ -8,6 +8,7 @@ import { configServiceRoutes } from "../assets/configData/configServiceRoutes";
 import Footer from "../components/ui/footer/Footer";
 import Home from "../components/ui/home/Home";
 import About from "../components/ui/about/About";
+import Deploy from "../components/ui/deploy/Deploy";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState(0);
@@ -44,7 +45,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/deploy" component={() => <div>Deploy</div>} />
+          <Route exact path="/deploy" component={Deploy} />
           {serviceRoutes}
           <Route path="/" component={Home} />
         </Switch>

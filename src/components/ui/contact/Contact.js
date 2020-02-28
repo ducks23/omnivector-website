@@ -40,10 +40,10 @@ function Contact(props) {
   return (
     <React.Fragment>
       <Button
-        variant={props.buttonType === "header" ? null : "contained"}
+        variant={props.buttonType === "text" ? null : "contained"}
         color="primary"
         onClick={handleClickOpen}
-        className={props.buttonType === "header" ? classes.tab : null}
+        className={props.buttonType === "text" ? classes.tab : null}
       >
         {props.buttonPrefix}
         {props.buttonContext}

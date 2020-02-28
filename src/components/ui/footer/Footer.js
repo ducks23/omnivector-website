@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
-
 import { makeStyles } from "@material-ui/core/styles";
+
+import Contact from "../contact/Contact";
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -121,18 +121,6 @@ const Footer = props => {
                 className={classes.link}
               >
                 Ceph
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/batch-enrichment"
-                onClick={() => [
-                  props.setSelectedValue(1),
-                  props.setSelectedIndex(6)
-                ]}
-                className={classes.link}
-              >
-                Batch Enrichment
               </Grid>
               <Grid
                 item
@@ -285,17 +273,16 @@ const Footer = props => {
               >
                 About Us
               </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/contact"
-                onClick={() => [
-                  props.setSelectedValue(3),
-                  props.setSelectedIndex(null)
-                ]}
-                className={classes.link}
-              >
-                Contact Us
+              <Grid item className={classes.link}>
+                <Contact
+                  buttonPrefix=""
+                  buttonContext="Contact Us"
+                  buttonSuffix=""
+                  subjectPrefix=""
+                  subjectContext=""
+                  subjectSuffix=""
+                  buttonType="text"
+                />
               </Grid>
             </Grid>
           </Grid>
