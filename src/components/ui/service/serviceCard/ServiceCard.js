@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Contact from "../../contact/Contact";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   deploy: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "white",
-    width: "30vw",
+    width: "500px",
     borderRadius: "16px",
     margin: "0 3vw",
     boxShadow: "4px 4px 8px rgba(0, 0, 0, .5)"
@@ -54,7 +55,7 @@ const ServiceCard = props => {
   const classes = useStyles();
 
   return (
-    <div className={classes.card}>
+    <Grid item className={classes.card}>
       <div>
         <h4 className={classes.headerTitle}>{props.title}</h4>
         <p className={classes.headerDescription}>{props.description}</p>
@@ -72,7 +73,6 @@ const ServiceCard = props => {
         variant="outlined"
         value={props.cliCommand}
         className={classes.jujuCard}
-        selected
       />
       <Button
         variant="outlined"
@@ -92,7 +92,7 @@ const ServiceCard = props => {
           subjectSuffix="..."
         />
       </div>
-    </div>
+    </Grid>
   );
 };
 

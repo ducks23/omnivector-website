@@ -14,8 +14,8 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+
 import IconButton from "@material-ui/core/IconButton";
-import ContactMailIcon from "@material-ui/icons/ContactMail";
 import InfoIcon from "@material-ui/icons/Info";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -174,7 +174,7 @@ export default function Header(props) {
 
   const handleMenuItemClick = (event, index) => {
     setAnchorEl(null);
-    props.setSelectedValue(1);
+    props.setSelectedValue(2);
     setOpenMenu(false);
     props.setSelectedIndex(index);
   };
@@ -191,16 +191,16 @@ export default function Header(props) {
 
   const mainRoutes = [
     { name: "Home", link: "/", activeIndex: 0, icon: <HomeIcon /> },
+    { name: "About Us", link: "/about", activeIndex: 1, icon: <InfoIcon /> },
     {
       name: "Services",
       link: "/services",
-      activeIndex: 1,
+      activeIndex: 2,
       ariaOwns: anchorEl ? "simple-menu" : undefined,
       ariaPopup: anchorEl ? "true" : undefined,
       mouseOver: event => handleClick(event),
       icon: <CodeIcon />
-    },
-    { name: "About Us", link: "/about", activeIndex: 2, icon: <InfoIcon /> }
+    }
   ];
 
   const menuOptions = [
@@ -214,14 +214,8 @@ export default function Header(props) {
     },
     { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 3 },
     { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 4 },
-    {
-      to: "/batch-enrichment",
-      label: "Batch Enrichment",
-      activeIndex: 1,
-      selectedIndex: 5
-    },
-    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 6 },
-    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 7 }
+    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 5 },
+    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 6 }
   ];
 
   useEffect(() => {

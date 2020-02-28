@@ -65,13 +65,6 @@ const Home = () => {
               graphic={`${esGraphic}`}
             />
           </Grid>
-          <Grid item>
-            <HomeService
-              title="1.5B UNIQUE PEOPLE RECORDS"
-              description="With over 150 data points for each record, we enable organizations to enrich single data points into robust information."
-              graphic={`${prGraphic}`}
-            />
-          </Grid>
         </Grid>
       </div>
     </div>

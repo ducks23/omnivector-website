@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
+import Contact from "../contact/Contact";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -36,7 +37,15 @@ const HomeService = props => {
       <img src={props.graphic} alt={props.title} className={classes.graphic} />
       <p className={classes.title}>{props.title}</p>
       <p className={classes.description}>{props.description}</p>
-      <Button className={classes.button}>Learn More</Button>
+      <Contact
+        buttonPrefix=""
+        buttonContext="Learn More"
+        buttonSuffix=""
+        subjectPrefix=""
+        subjectContext=""
+        subjectSuffix=""
+        buttonType=""
+      />
     </div>
   );
 };

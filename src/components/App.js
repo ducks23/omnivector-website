@@ -8,7 +8,6 @@ import { configServiceRoutes } from "../assets/configData/configServiceRoutes";
 import Footer from "../components/ui/footer/Footer";
 import Home from "../components/ui/home/Home";
 import About from "../components/ui/about/About";
-import Contact from "../components/ui/contact/Contact";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState(0);

@@ -3,7 +3,6 @@ import esImage from "../images/elasticsearch.jpg";
 import hpcImage from "../images/hpc.jpg";
 import redisImage from "../images/redis.jpg";
 import cephImage from "../images/ceph.jpg";
-import batchImage from "../images/batch.jpg";
 import devopsImage from "../images/devops.jpg";
 import loggingImage from "../images/logging.jpg";
 
@@ -168,18 +167,6 @@ export const configServiceRoutes = [
         cardImg: `${cephExtendedImg}`,
         cardDescription: "The Ceph Core bundle + Ceph Mon and Ceph OSD."
       }
-    ]
-  },
-  {
-    path: "/batch-enrichment",
-    serviceName: "Batch Enrichment",
-    serviceImage: `${batchImage}`,
-    serviceTitle: "1.5B UNIQUE PEOPLE RECORDS, DELIVERED AT SCALE.",
-    serviceText:
-      "With over 150 data points for each record, we provide a unique data set that enables organizations to power their data driven decisions. Contact us now to start enriching your data.",
-    cardData: [
-      { cardDataId: "", cardTitle: "", cardDescription: "" },
-      { cardDataId: "", cardTitle: "", cardDescription: "" }
     ]
   },
   {

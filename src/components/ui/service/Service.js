@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./Service.module.css";
 import ServiceHeader from "./serviceHeader/ServiceHeader";
 import ServiceCard from "./serviceCard/ServiceCard";
+import Grid from "@material-ui/core/Grid";
 
 const Service = props => {
   const serviceCards = props.cardData.map((card, index) => (
@@ -24,7 +25,9 @@ const Service = props => {
         serviceImage={props.serviceImage}
         serviceText={props.serviceText}
       />
-      <div className={classes.CardContainer}>{serviceCards}</div>
+      <Grid container className={classes.CardContainer}>
+        {serviceCards}
+      </Grid>
     </div>
   );
 };
