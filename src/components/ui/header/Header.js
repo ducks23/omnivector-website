@@ -26,6 +26,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 
+import Contact from "../contact/Contact";
 import logo from "../../../assets/images/OVLogoHoriz2color.svg";
 
 function ElevationScroll(props) {
@@ -199,35 +200,28 @@ export default function Header(props) {
       mouseOver: event => handleClick(event),
       icon: <CodeIcon />
     },
-    { name: "About Us", link: "/about", activeIndex: 2, icon: <InfoIcon /> },
-    {
-      name: "Contact Us",
-      link: "/contact",
-      activeIndex: 3,
-      icon: <ContactMailIcon />
-    }
+    { name: "About Us", link: "/about", activeIndex: 2, icon: <InfoIcon /> }
   ];
 
   const menuOptions = [
-    { to: "/services", label: "Services", activeIndex: 1, selectedIndex: 0 },
-    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 1 },
-    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 2 },
+    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 0 },
+    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 1 },
     {
       to: "/elasticsearch",
       label: "Elasticsearch",
       activeIndex: 1,
-      selectedIndex: 3
+      selectedIndex: 2
     },
-    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 4 },
-    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 5 },
+    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 3 },
+    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 4 },
     {
       to: "/batch-enrichment",
       label: "Batch Enrichment",
       activeIndex: 1,
-      selectedIndex: 6
+      selectedIndex: 5
     },
-    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 7 },
-    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 8 }
+    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 6 },
+    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 7 }
   ];
 
   useEffect(() => {
@@ -291,6 +285,15 @@ export default function Header(props) {
           />
         ))}
       </Tabs>
+      <Contact
+        buttonPrefix=""
+        buttonContext="Contact Us"
+        buttonSuffix=""
+        subjectPrefix=""
+        subjectContext=""
+        subjectSuffix=""
+        buttonType="header"
+      />
       <Button
         className={classes.deploy}
         variant="contained"

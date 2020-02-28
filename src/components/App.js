@@ -8,9 +8,10 @@ import { configServiceRoutes } from "../assets/configData/configServiceRoutes";
 import Footer from "../components/ui/footer/Footer";
 import Home from "../components/ui/home/Home";
 import About from "../components/ui/about/About";
+import Contact from "../components/ui/contact/Contact";
 
 function App() {
-  const [selectedValue, setSelectedValue] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const serviceRoutes = configServiceRoutes.map(service => (
@@ -44,11 +45,6 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route exact path="/about" component={About} />
-          <Route
-            exact
-            path="/contact-us"
-            component={() => <div>Contact Us</div>}
-          />
           <Route exact path="/deploy" component={() => <div>Deploy</div>} />
           {serviceRoutes}
           <Route path="/" component={Home} />

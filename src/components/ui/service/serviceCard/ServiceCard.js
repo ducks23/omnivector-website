@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
+import Contact from "../../contact/Contact";
 
 const useStyles = makeStyles(theme => ({
   deploy: {
@@ -82,9 +83,14 @@ const ServiceCard = props => {
         Deploy with JAAS
       </Button>
       <div className={classes.footer}>
-        <Button className={classes.deploy} variant="contained">
-          Get help with {props.title}...
-        </Button>
+        <Contact
+          buttonPrefix="Get help with "
+          buttonContext={props.title}
+          buttonSuffix="..."
+          subjectPrefix="I'm interested in finding out more about "
+          subjectContext={props.title}
+          subjectSuffix="..."
+        />
       </div>
     </div>
   );
