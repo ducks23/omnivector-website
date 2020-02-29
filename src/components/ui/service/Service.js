@@ -13,8 +13,11 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
-    margin: "36px auto",
-    textAlign: "center"
+    margin: "5vw auto",
+    textAlign: "center",
+    [theme.breakpoints.down("xs")]: {
+      margin: "18vw auto"
+    }
   }
 }));
 

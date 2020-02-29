@@ -17,10 +17,14 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "white",
-    width: "500px",
+    width: "450px",
     borderRadius: "16px",
-    margin: "12px 36px",
-    boxShadow: "4px 4px 8px rgba(0, 0, 0, .5)"
+    margin: "12px 3vw",
+    boxShadow: "4px 4px 8px rgba(0, 0, 0, .5)",
+    [theme.breakpoints.down("xs")]: {
+      width: "375px",
+      margin: "12px 0px"
+    }
   },
   headerTitle: {
     ...theme.typography.deploy,
