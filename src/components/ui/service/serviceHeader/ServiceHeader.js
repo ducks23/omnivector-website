@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(theme => ({
   Container: {
     display: "flex",
-    margin: "5vw 13vw",
+    margin: "5vw 10vw",
     width: "50%"
   },
   containerImg: {

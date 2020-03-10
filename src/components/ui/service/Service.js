@@ -7,17 +7,14 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   Service: {
-    width: "100%"
+    width: "100vw"
   },
   CardContainer: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
-    margin: "5vw auto",
     textAlign: "center",
-    [theme.breakpoints.down("xs")]: {
-      margin: "18vw auto"
-    }
+    marginBottom: "3vw"
   }
 }));
 

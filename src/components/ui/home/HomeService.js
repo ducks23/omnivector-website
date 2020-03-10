@@ -11,9 +11,11 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     ...theme.typography.tab,
+    margin: 0,
     textAlign: "center"
   },
   description: {
+    fontFamily: "Ubuntu",
     textAlign: "center"
   },
   graphic: {

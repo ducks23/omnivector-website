@@ -204,18 +204,19 @@ export default function Header(props) {
   ];
 
   const menuOptions = [
-    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 0 },
-    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 1 },
+    { to: "/services", label: "Services", activeIndex: 1, selectedIndex: 0 },
+    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 1 },
+    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 2 },
     {
       to: "/elasticsearch",
       label: "Elasticsearch",
       activeIndex: 1,
-      selectedIndex: 2
+      selectedIndex: 3
     },
-    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 3 },
-    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 4 },
-    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 5 },
-    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 6 }
+    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 4 },
+    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 5 },
+    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 6 },
+    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 7 }
   ];
 
   useEffect(() => {
