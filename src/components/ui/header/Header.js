@@ -230,6 +230,7 @@ export default function Header(props) {
         setSelectedValue={() => props.setSelectedValue(false)}
         selectedValue={props.selectedValue}
         menuOptions={menuOptions}
+        title="Services"
       />
       <Contact
         buttonPrefix=""
@@ -242,7 +243,7 @@ export default function Header(props) {
       />
       <Button
         className={classes.deploy}
-        variant="contained"
+        variant="containΩed"
         component={Link}
         to="/deploy"
         onClick={() => props.setSelectedValue(null)}

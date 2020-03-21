@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
+import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-import Menu from "@material-ui/core/Menu";
+import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
-
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -16,29 +16,31 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120,
     marginLeft: "5px",
     opacity: ".8",
+    height: "4em",
     top: "-8px"
   },
   buttonSelected: {
     ...theme.typography.tab,
-    color: theme.palette.secondary.light,
+    color: "white",
     minWidth: 120,
     marginLeft: "5px",
-    opacity: ".8",
-    top: "-8px",
-    borderBottom: "1px solid white"
+    opacity: "1",
+    height: "5em",
+    top: "-7px",
+    borderRadius: 0,
+    borderBottom: "1.5px solid " + theme.palette.primary.main
   }
 }));
 
 export default function DropdownMenu(props) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
-
-  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleMenuItemClick = (event, index) => {
     console.log(props);
@@ -61,8 +63,43 @@ export default function DropdownMenu(props) {
     }
   }
 
+  const StyledMenu = withStyles({
+    paper: {
+      border: "1px solid #d3d4d5"
+    }
+  })(props => (
+    <ClickAwayListener onClickAway={handleClose}>
+      <Paper className={classes.paper}>
+        <MenuList
+          elevation={0}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
+          {...props}
+        />
+      </Paper>
+    </ClickAwayListener>
+  ));
+
+  const StyledMenuItem = withStyles(theme => ({
+    root: {
+      "&:focus": {
+        backgroundColor: theme.palette.primary.light,
+        "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+          color: "theme.palette.common.white"
+        }
+      }
+    }
+  }))(MenuItem);
+
   const menuItems = props.menuOptions.map((item, index) => (
-    <MenuItem
+    <StyledMenuItem
       key={item.to}
       onClick={event => handleMenuItemClick(event, index)}
       selected={index === selectedIndex}
@@ -71,7 +108,7 @@ export default function DropdownMenu(props) {
       classes={{ root: classes.menuItem, selected: classes.selectedItem }}
     >
       {item.label}
-    </MenuItem>
+    </StyledMenuItem>
   ));
 
   // return focus to the button when we transitioned from !open -> open
@@ -88,16 +125,18 @@ export default function DropdownMenu(props) {
       <div>
         <Button
           ref={anchorRef}
-          aria-controls={open ? "menu-list-grow" : undefined}
+          aria-controls={open ? "MenuList-list-grow" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
+          onHover={handleToggle}
+          to={props.to ? props.to : null}
           className={
             props.selectedValue !== false
               ? classes.button
               : classes.buttonSelected
           }
         >
-          Services
+          {props.title}
         </Button>
         <Popper
           open={open}
@@ -114,15 +153,13 @@ export default function DropdownMenu(props) {
                   placement === "bottom" ? "center top" : "center bottom"
               }}
             >
-              <ClickAwayListener onClickAway={handleClose}>
-                <Menu
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleListKeyDown}
-                >
-                  {menuItems}
-                </Menu>
-              </ClickAwayListener>
+              <StyledMenu
+                autoFocusItem={open}
+                id="MenuList-list-grow"
+                onKeyDown={handleListKeyDown}
+              >
+                {menuItems}
+              </StyledMenu>
             </Grow>
           )}
         </Popper>
