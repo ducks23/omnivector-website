@@ -11,24 +11,22 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import MenuIcon from "@material-ui/icons/Menu";
+
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import HomeIcon from "@material-ui/icons/Home";
-import MenuIcon from "@material-ui/icons/Menu";
-import CodeIcon from "@material-ui/icons/Code";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 
+import DropdownMenu from "../dropdownMenu/DropdownMenu";
 import Contact from "../contact/Contact";
 import logo from "../../../assets/images/OVLogoHoriz2color.svg";
-
 function ElevationScroll(props) {
   const { children } = props;
   const trigger = useScrollTrigger({
@@ -144,7 +142,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "auto"
   },
   selectedItem: {
-    color: theme.palette.secondary.dark,
+    color: theme.palette.primary.dark,
     opacity: 1
   },
   appBar: {
@@ -165,105 +163,50 @@ export default function Header(props) {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(false);
-
   const handleChange = (event, newValue) => {
     props.setSelectedValue(newValue);
   };
 
-  const handleMenuItemClick = (event, index) => {
-    setAnchorEl(null);
-    props.setSelectedValue(2);
-    setOpenMenu(false);
-    props.setSelectedIndex(index);
-  };
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-    setOpenMenu(true);
-  };
-
-  const handleClose = event => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-  };
-
   const mainRoutes = [
     { name: "Home", link: "/", activeIndex: 0, icon: <HomeIcon /> },
-    { name: "About Us", link: "/about", activeIndex: 1, icon: <InfoIcon /> },
-    {
-      name: "Services",
-      link: "/services",
-      activeIndex: 2,
-      ariaOwns: anchorEl ? "simple-menu" : undefined,
-      ariaPopup: anchorEl ? "true" : undefined,
-      mouseOver: event => handleClick(event),
-      icon: <CodeIcon />
-    }
+    { name: "About Us", link: "/about", activeIndex: 1, icon: <InfoIcon /> }
   ];
 
   const menuOptions = [
-    { to: "/services", label: "Services", activeIndex: 1, selectedIndex: 0 },
-    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 1 },
-    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 2 },
+    { to: "/big-data", label: "Big Data", activeIndex: 1, selectedIndex: 0 },
+    { to: "/hpc", label: "HPC", activeIndex: 1, selectedIndex: 1 },
     {
       to: "/elasticsearch",
       label: "Elasticsearch",
       activeIndex: 1,
-      selectedIndex: 3
+      selectedIndex: 2
     },
-    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 4 },
-    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 5 },
-    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 6 },
-    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 7 }
+    { to: "/redis", label: "Redis", activeIndex: 1, selectedIndex: 3 },
+    { to: "/ceph", label: "Ceph", activeIndex: 1, selectedIndex: 4 },
+    { to: "/devops", label: "DevOps", activeIndex: 1, selectedIndex: 5 },
+    { to: "/logging", label: "Logging", activeIndex: 1, selectedIndex: 6 }
   ];
 
   useEffect(() => {
-    [...menuOptions, ...mainRoutes].forEach(route => {
+    [...mainRoutes].forEach(route => {
       switch (window.location.pathname) {
         case `${route.string}`:
           if (props.selectedValue !== route.index) {
             props.setSelectedValue(route.index);
-            if (
-              route.selectedIndex &&
-              route.selectedIndex !== props.selectedIndex
-            ) {
-              props.setSelectedIndex(route.selectedIndex);
-            }
           }
           break;
         default:
           break;
       }
     });
-  }, [
-    props.selectedValue,
-    menuOptions,
-    props.selectedIndex,
-    mainRoutes,
-    props
-  ]);
-
-  const menuItems = menuOptions.map((item, index) => (
-    <MenuItem
-      key={item.to}
-      onClick={event => handleMenuItemClick(event, index)}
-      selected={index === props.selectedIndex}
-      component={Link}
-      to={item.to}
-      classes={{ root: classes.menuItem, selected: classes.selectedItem }}
-    >
-      {item.label}
-    </MenuItem>
-  ));
+  }, [mainRoutes, props]);
 
   const tabs = (
     <Fragment>
       <Tabs
         value={props.selectedValue}
         onChange={handleChange}
-        indicatorColor="secondary"
+        indicatorColor="primary"
         variant="fullWidth"
         className={classes.tabContainer}
       >
@@ -280,6 +223,14 @@ export default function Header(props) {
           />
         ))}
       </Tabs>
+      <DropdownMenu
+        id="simple-menu"
+        classes={{ paper: classes.menu }}
+        style={{ zIndex: 1302 }}
+        setSelectedValue={() => props.setSelectedValue(false)}
+        selectedValue={props.selectedValue}
+        menuOptions={menuOptions}
+      />
       <Contact
         buttonPrefix=""
         buttonContext="Contact Us"
@@ -298,17 +249,6 @@ export default function Header(props) {
       >
         Deploy!
       </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        open={openMenu}
-        onClose={handleClose}
-        MenuListProps={{ onMouseLeave: handleClose }}
-        classes={{ paper: classes.menu }}
-        style={{ zIndex: 1302 }}
-      >
-        {menuItems}
-      </Menu>
     </Fragment>
   );
 

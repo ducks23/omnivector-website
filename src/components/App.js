@@ -13,7 +13,6 @@ import Services from "../components/ui/service/Services";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState(0);
-  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const serviceRoutes = configServiceRoutes.map(service => (
     <Route
@@ -38,8 +37,6 @@ function App() {
       <BrowserRouter>
         <Header
           selectedValue={selectedValue}
-          setSelectedIndex={setSelectedIndex}
-          selectedIndex={selectedIndex}
           setSelectedValue={setSelectedValue}
         />
         <Switch>
@@ -52,8 +49,6 @@ function App() {
         </Switch>
         <Footer
           selectedValue={selectedValue}
-          setSelectedIndex={setSelectedIndex}
-          selectedIndex={selectedIndex}
           setSelectedValue={setSelectedValue}
         />
       </BrowserRouter>
