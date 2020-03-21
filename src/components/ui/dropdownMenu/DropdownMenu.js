@@ -121,14 +121,18 @@ export default function DropdownMenu(props) {
   }, [open]);
 
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      onMouseEnter={handleToggle}
+      onMouseLeave={handleToggle}
+    >
       <div>
         <Button
           ref={anchorRef}
           aria-controls={open ? "MenuList-list-grow" : undefined}
           aria-haspopup="true"
+          disableRipple
           onClick={handleToggle}
-          onHover={handleToggle}
           to={props.to ? props.to : null}
           className={
             props.selectedValue !== false
