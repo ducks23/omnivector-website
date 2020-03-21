@@ -40,10 +40,10 @@ function Contact(props) {
   return (
     <React.Fragment>
       <Button
-        variant={props.buttonType === "header" ? null : "contained"}
+        variant={props.buttonType === "text" ? null : "contained"}
         color="primary"
         onClick={handleClickOpen}
-        className={props.buttonType === "header" ? classes.tab : null}
+        className={props.buttonType === "text" ? classes.tab : null}
       >
         {props.buttonPrefix}
         {props.buttonContext}
@@ -84,10 +84,10 @@ function Contact(props) {
                 validationSchema={Yup.object().shape({
                   email: Yup.string()
                     .email()
-                    .required("Email address required"),
-                  name: Yup.string().required("Name required"),
-                  message: Yup.string().required("Message required"),
-                  subject: Yup.string().required("Subject required")
+                    .required("Email address is required."),
+                  name: Yup.string().required("Name is required."),
+                  message: Yup.string().required("Message is required."),
+                  subject: Yup.string().required("Subject is required.")
                 })}
               >
                 {props => {
@@ -125,6 +125,7 @@ function Contact(props) {
                         size="small"
                         color="secondary"
                         fullWidth
+                        required
                         variant="outlined"
                         error={errors.email && touched.email}
                         label="email"
@@ -144,6 +145,7 @@ function Contact(props) {
                         color="secondary"
                         fullWidth
                         variant="outlined"
+                        required
                         label="subject"
                         name="subject"
                         defaultValue={props.subject}
@@ -165,6 +167,7 @@ function Contact(props) {
                         error={errors.message && touched.message}
                         label="message"
                         name="message"
+                        required
                         className={classes.textField}
                         value={values.message}
                         onChange={handleChange}

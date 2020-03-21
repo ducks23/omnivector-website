@@ -48,6 +48,11 @@ const useStyles = makeStyles(theme => ({
     color: "black",
     padding: "15px",
     borderRadius: "36px"
+  },
+  spacerDiv: {
+    [theme.breakpoints.down("md")]: {
+      height: "25vh"
+    }
   }
 }));
 
@@ -83,6 +88,7 @@ const About = () => {
           </Typography>
         </Grid>
       </Grid>
+      <div className={classes.spacerDiv}></div>
     </Container>
   );
 };

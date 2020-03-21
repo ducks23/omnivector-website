@@ -8,7 +8,6 @@ import lfGraphic from "../../../assets/images/lifecycle.png";
 import caGraphic from "../../../assets/images/cloud-agnostic.png";
 import hsGraphic from "../../../assets/images/cloud-archetecture.png";
 import esGraphic from "../../../assets/images/computer-monitoring.png";
-import prGraphic from "../../../assets/images/people.png";
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -63,13 +62,6 @@ const Home = () => {
               title="ENTERPRISE SUPPORT"
               description="OSL creates solutions for the entire lifecycle of the application, development workflow, and production operations."
               graphic={`${esGraphic}`}
-            />
-          </Grid>
-          <Grid item>
-            <HomeService
-              title="1.5B UNIQUE PEOPLE RECORDS"
-              description="With over 150 data points for each record, we enable organizations to enrich single data points into robust information."
-              graphic={`${prGraphic}`}
             />
           </Grid>
         </Grid>
