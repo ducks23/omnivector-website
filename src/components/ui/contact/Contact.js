@@ -9,6 +9,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import emailjs from "emailjs-com";
+
+const service_id = "OSL-web-contact-gmail";
+const template_id = "website_contact_us";
+const user_id = "";
 
 const useStyles = makeStyles(theme => ({
   tab: {
@@ -76,10 +81,40 @@ function Contact(props) {
                     props.subjectContext +
                     props.subjectSuffix
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                  setSubmitting(true);
-                  console.log(values);
-                  setSubmitionCompleted(true);
+                onSubmit={(
+                  values: IFormValues,
+                  actions: FormikHelpers<IFormValues>
+                ) => {
+                  actions.setSubmitting(true);
+                  setTimeout(() => {
+                    var template_params = {
+                      from_name: values.name,
+                      from_email: values.email,
+                      message_subject: values.subject,
+                      message_body: values.message
+                    };
+
+                    emailjs
+                      .send(
+                        service_id,
+                        template_id,
+                        {
+                          from_name: values.name,
+                          from_email: values.email,
+                          message_subject: values.subject,
+                          message_body: values.message
+                        },
+                        user_id
+                      )
+                      .then(res => {
+                        console.log("[EMAIL RESPONSE] ", res);
+                        // setSubmitionCompleted(true);
+                      })
+                      .catch(() => {
+                        actions.setSubmitting(false);
+                        alert("Error sending email...");
+                      });
+                  }, 1000);
                 }}
                 validationSchema={Yup.object().shape({
                   email: Yup.string()

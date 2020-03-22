@@ -243,7 +243,7 @@ export default function Header(props) {
       />
       <Button
         className={classes.deploy}
-        variant="containΩed"
+        variant="contained"
         component={Link}
         to="/deploy"
         onClick={() => props.setSelectedValue(null)}

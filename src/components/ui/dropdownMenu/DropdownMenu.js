@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
@@ -49,13 +48,6 @@ export default function DropdownMenu(props) {
     props.setSelectedValue();
   };
 
-  const handleClose = event => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-    setOpen(false);
-  };
-
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -64,27 +56,13 @@ export default function DropdownMenu(props) {
   }
 
   const StyledMenu = withStyles({
-    paper: {
+    root: {
       border: "1px solid #d3d4d5"
     }
   })(props => (
-    <ClickAwayListener onClickAway={handleClose}>
-      <Paper className={classes.paper}>
-        <MenuList
-          elevation={0}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center"
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "center"
-          }}
-          {...props}
-        />
-      </Paper>
-    </ClickAwayListener>
+    <Paper className={classes.menuContainer}>
+      <MenuList elevation={0} {...props} />
+    </Paper>
   ));
 
   const StyledMenuItem = withStyles(theme => ({
