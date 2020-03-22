@@ -108,7 +108,7 @@ function Contact(props) {
                       )
                       .then(res => {
                         console.log("[EMAIL RESPONSE] ", res);
-                        // setSubmitionCompleted(true);
+                        setSubmitionCompleted(true);
                       })
                       .catch(() => {
                         actions.setSubmitting(false);
