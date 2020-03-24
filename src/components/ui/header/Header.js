@@ -143,7 +143,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "auto"
   },
   selectedItem: {
-    color: theme.palette.primary.dark,
+    color: theme.palette.primary.light,
     opacity: 1
   },
   appBar: {
@@ -158,21 +158,45 @@ const useStyles = makeStyles(theme => ({
     ...theme.typography.tab,
     color: "white",
     width: "20vw",
-    marginLeft: "auto",
+    marginLeft: "1.5vw",
     textAlign: "center",
-    opacity: 0.7
+    opacity: 0.5
   },
   servicesIcon: {
     color: "white",
     textAlign: "center",
-    opacity: 0.7,
-    marginLeft: "14px"
+    opacity: 0.5,
+    marginLeft: "15px"
   },
   servicesContainer: {
     width: "20vw",
     display: "flex",
     flexDirection: "row",
     alignItems: "center"
+  },
+  serviceslistItem: {
+    fontFamily: "Ubuntu",
+    textTransform: "none",
+    fontWeight: 500,
+    display: "flex",
+    justifyContent: "left",
+    textAlign: "left",
+    margin: "auto",
+    color: "white",
+    opacity: 0.5,
+    marginLeft: "2vw"
+  },
+  selectedServiceslistItem: {
+    fontFamily: "Ubuntu",
+    textTransform: "none",
+    fontWeight: 700,
+    display: "flex",
+    justifyContent: "left",
+    textAlign: "left",
+    margin: "auto",
+    color: theme.palette.primary.light,
+    opacity: 1,
+    marginLeft: "2vw"
   }
 }));
 
@@ -186,6 +210,12 @@ export default function Header(props) {
 
   const handleChange = (event, newValue) => {
     props.setSelectedValue(newValue);
+    props.setSelectedIndex(null);
+  };
+
+  const handleDrawerServiceClick = event => {
+    props.setSelectedIndex(event);
+    props.setSelectedValue(false);
   };
 
   const mainRoutes = [
@@ -250,6 +280,8 @@ export default function Header(props) {
         style={{ zIndex: 1302 }}
         setSelectedValue={() => props.setSelectedValue(false)}
         selectedValue={props.selectedValue}
+        setSelectedIndex={props.setSelectedIndex}
+        selectedIndex={props.selectedIndex}
         menuOptions={menuOptions}
         title="Services"
       />
@@ -291,7 +323,8 @@ export default function Header(props) {
               <ListItem
                 onClick={() => [
                   setDrawerOpen(false),
-                  props.setSelectedValue(route.activeIndex)
+                  props.setSelectedValue(route.activeIndex),
+                  props.setSelectedIndex(null)
                 ]}
                 button
                 component={Link}
@@ -307,24 +340,25 @@ export default function Header(props) {
             </Fragment>
           ))}
         </List>
-        <List>
+        <List dense>
           <div className={classes.servicesContainer}>
             <StoreIcon className={classes.servicesIcon} />
             <span className={classes.servicesLabel}>Services</span>
             <Divider variant="middle" classes={{ root: classes.divider }} />
           </div>
           {menuOptions.map((route, index) => (
-            <Fragment key={route.name}>
+            <Fragment>
               <ListItem
                 onClick={() => [
                   setDrawerOpen(false),
-                  props.setSelectedValue(index)
+                  handleDrawerServiceClick(index)
                 ]}
                 button
                 component={Link}
                 to={route.to}
-                className={classes.listItem}
-                classes={{ selected: classes.selectedItem }}
+                selected={index === props.selectedIndex}
+                className={classes.serviceslistItem}
+                classes={{ selected: classes.selectedServiceslistItem }}
               >
                 <ListItemText disableTypography>{route.label}</ListItemText>
               </ListItem>

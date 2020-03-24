@@ -13,6 +13,7 @@ import Services from "../components/ui/service/Services";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const serviceRoutes = configServiceRoutes.map(service => (
     <Route
@@ -38,6 +39,8 @@ function App() {
         <Header
           selectedValue={selectedValue}
           setSelectedValue={setSelectedValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
         />
         <Switch>
           <Route exact path="/" component={Home} />

@@ -107,7 +107,6 @@ function Contact(props) {
                         user_id
                       )
                       .then(res => {
-                        console.log("[EMAIL RESPONSE] ", res);
                         setSubmitionCompleted(true);
                       })
                       .catch(() => {

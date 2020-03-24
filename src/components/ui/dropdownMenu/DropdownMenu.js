@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120,
     width: "80%",
     opacity: "1",
-
     height: "5em",
     top: "-7px",
     borderRadius: 0,
@@ -37,17 +36,15 @@ export default function DropdownMenu(props) {
   const classes = useStyles();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
 
   const handleMenuItemClick = (event, index) => {
-    console.log(props);
     handleToggle();
-    setSelectedIndex(index);
-    props.setSelectedValue();
+    props.setSelectedIndex(index);
+    props.setSelectedValue(false);
   };
 
   function handleListKeyDown(event) {
@@ -82,7 +79,7 @@ export default function DropdownMenu(props) {
     <StyledMenuItem
       key={item.to}
       onClick={event => handleMenuItemClick(event, index)}
-      selected={index === selectedIndex}
+      selected={index === props.selectedIndex}
       component={Link}
       to={item.to}
       classes={{ root: classes.menuItem, selected: classes.selectedItem }}
