@@ -176,10 +176,7 @@ export const configServiceRoutes = [
     serviceTitle: "MAKE OMNIVECTOR YOUR OPS EXPERT PARTNER.",
     serviceText:
       "OSL provides collaboration, monitoring, lifecycle and automation for private, public and hybrid cloud solutions. We provide agile infrastructure for application development by automating your CI/CD pipeline. We work with industry leaders and enterprise cloud platforms to provide best in class security, compliance and support. This enables you to improve your efficiency while reducing complexity and cost.",
-    cardData: [
-      { cardDataId: "", cardTitle: "", cardDescription: "" },
-      { cardDataId: "", cardTitle: "", cardDescription: "" }
-    ]
+    cardData: []
   },
   {
     path: "/logging",
