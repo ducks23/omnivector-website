@@ -87,13 +87,6 @@ function Contact(props) {
                 ) => {
                   actions.setSubmitting(true);
                   setTimeout(() => {
-                    var template_params = {
-                      from_name: values.name,
-                      from_email: values.email,
-                      message_subject: values.subject,
-                      message_body: values.message
-                    };
-
                     emailjs
                       .send(
                         service_id,
