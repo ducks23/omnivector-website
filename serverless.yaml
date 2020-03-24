@@ -119,7 +119,7 @@ resources:
                 Forward: none
             ViewerProtocolPolicy: redirect-to-https
           ViewerCertificate:
-            AcmCertificateArn: "arn:aws:acm:us-west-2:212021838531:certificate/a6426497-4446-4f21-bc1b-f19d3006d133"
+            AcmCertificateArn: "arn:aws:acm:us-east-1:212021838531:certificate/0f1303d9-c4d6-44e1-973c-398362f1a130"
             MinimumProtocolVersion: TLSv1.2_2018
             SslSupportMethod: sni-only
 
