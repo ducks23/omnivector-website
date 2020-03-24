@@ -75,7 +75,6 @@ const ServiceCard = props => {
         />
       </div>
       <TextField
-        id="outlined-basic"
         label="Deploy with CLI"
         variant="outlined"
         value={props.cliCommand}

@@ -5,7 +5,7 @@ const Deploy = () => {
   return (
     <div>
       <Iframe
-        url="https://jaas.ai/u/omnivector"
+        url="https://jaas.ai/u/omnivector#charms"
         width="100%"
         height="4280px"
         id="jaas"

@@ -1,0 +1,135 @@
+---
+service: omnivector-website
+
+plugins:
+  - serverless-single-page-app-plugin
+  - serverless-plugin-resource-tagging
+
+provider:
+  name: aws
+  region: us-west-2
+
+  runtime: nodejs13.x
+
+  stage: ${opt:stage, 'staging'}
+
+  stackTags:
+    Application: ${self:service}
+    Stage: ${self:provider.stage}
+
+  environment:
+    STAGE: ${self:provider.stage}
+
+  iamRoleStatements:
+    -  Effect: "Allow"
+       Action:
+         - "s3:*"
+       Resource:
+         Fn::Join:
+           - ""
+           - - "arn:aws:s3:::"
+             - ${self:service}-${self:provider.stage}-assets/*
+custom:
+  s3Bucket: ${self:service}-${self:provider.stage}-assets
+  s3LocalPath: build/
+
+package:
+  exclude:
+    - public/
+    - build/
+    - src/
+    - db.*
+    - "*.sqlite3"
+    - node_modules/**
+    - .tox/**
+    - .git/**
+    - '*.swp'
+    - .gitignore
+    - env/**
+    - venv/**
+    - testenv/**
+    - static/**
+    - docker-compose.yaml
+    - docker-entrypoint.sh
+    - Makefile
+    - tox.ini
+    - .dockerignore
+    - docs/
+
+resources:
+  Resources:
+    WebAppS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.s3Bucket}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+          RoutingRules:
+            - RedirectRule:
+                ReplaceKeyWith: "index.html"
+              RoutingRuleCondition:
+                KeyPrefixEquals: "/"
+    WebAppS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: WebAppS3Bucket
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+              - s3:GetObject
+              Resource: arn:aws:s3:::${self:custom.s3Bucket}/*
+    WebAppCloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Aliases:
+            - ${self:provider.stage}.omnivector.solutions
+          Origins:
+            - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
+              Id: WebApp
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: https-only
+          Enabled: 'true'
+          DefaultRootObject: index.html
+          CustomErrorResponses:
+            - ErrorCode: 404
+              ResponseCode: 200
+              ResponsePagePath: /index.html
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            TargetOriginId: WebApp
+            ForwardedValues:
+              QueryString: 'false'
+              Cookies:
+                Forward: none
+            ViewerProtocolPolicy: redirect-to-https
+          ViewerCertificate:
+            AcmCertificateArn: "arn:aws:acm:us-east-1:212021838531:certificate/0f1303d9-c4d6-44e1-973c-398362f1a130"
+            MinimumProtocolVersion: TLSv1.2_2018
+            SslSupportMethod: sni-only
+
+  Outputs:
+    WebAppS3BucketOutput:
+      Value:
+        'Ref': WebAppS3Bucket
+    WebAppS3BucketUrl:
+      Value:
+        'Fn::GetAtt': [ WebAppS3Bucket, WebsiteURL ]
+    WebAppCloudFrontDistributionOutput:
+      Value:
+        'Fn::GetAtt': [ WebAppCloudFrontDistribution, DomainName ]

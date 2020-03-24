@@ -38,9 +38,9 @@ function App() {
       <BrowserRouter>
         <Header
           selectedValue={selectedValue}
-          setSelectedIndex={setSelectedIndex}
-          selectedIndex={selectedIndex}
           setSelectedValue={setSelectedValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
         />
         <Switch>
           <Route exact path="/" component={Home} />
@@ -52,8 +52,6 @@ function App() {
         </Switch>
         <Footer
           selectedValue={selectedValue}
-          setSelectedIndex={setSelectedIndex}
-          selectedIndex={selectedIndex}
           setSelectedValue={setSelectedValue}
         />
       </BrowserRouter>
