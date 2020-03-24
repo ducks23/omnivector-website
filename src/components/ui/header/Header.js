@@ -18,6 +18,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import HomeIcon from "@material-ui/icons/Home";
+import StoreIcon from "@material-ui/icons/Store";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -152,6 +153,26 @@ const useStyles = makeStyles(theme => ({
   divider: {
     backgroundColor: theme.palette.primary.light,
     opacity: 0.7
+  },
+  servicesLabel: {
+    ...theme.typography.tab,
+    color: "white",
+    width: "20vw",
+    marginLeft: "auto",
+    textAlign: "center",
+    opacity: 0.7
+  },
+  servicesIcon: {
+    color: "white",
+    textAlign: "center",
+    opacity: 0.7,
+    marginLeft: "14px"
+  },
+  servicesContainer: {
+    width: "20vw",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   }
 }));
 
@@ -281,6 +302,31 @@ export default function Header(props) {
               >
                 <ListItemIcon>{route.icon}</ListItemIcon>
                 <ListItemText disableTypography>{route.name}</ListItemText>
+              </ListItem>
+              <Divider variant="middle" classes={{ root: classes.divider }} />
+            </Fragment>
+          ))}
+        </List>
+        <List>
+          <div className={classes.servicesContainer}>
+            <StoreIcon className={classes.servicesIcon} />
+            <span className={classes.servicesLabel}>Services</span>
+            <Divider variant="middle" classes={{ root: classes.divider }} />
+          </div>
+          {menuOptions.map((route, index) => (
+            <Fragment key={route.name}>
+              <ListItem
+                onClick={() => [
+                  setDrawerOpen(false),
+                  props.setSelectedValue(index)
+                ]}
+                button
+                component={Link}
+                to={route.to}
+                className={classes.listItem}
+                classes={{ selected: classes.selectedItem }}
+              >
+                <ListItemText disableTypography>{route.label}</ListItemText>
               </ListItem>
               <Divider variant="middle" classes={{ root: classes.divider }} />
             </Fragment>

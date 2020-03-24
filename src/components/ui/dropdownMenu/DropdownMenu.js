@@ -13,8 +13,9 @@ const useStyles = makeStyles(theme => ({
     ...theme.typography.tab,
     color: "white",
     minWidth: 120,
-    marginLeft: "5px",
-    opacity: ".8",
+    width: "100%",
+    margin: "auto",
+    opacity: ".7",
     height: "4em",
     top: "-8px"
   },
@@ -22,8 +23,9 @@ const useStyles = makeStyles(theme => ({
     ...theme.typography.tab,
     color: "white",
     minWidth: 120,
-    marginLeft: "5px",
+    width: "80%",
     opacity: "1",
+
     height: "5em",
     top: "-7px",
     borderRadius: 0,
@@ -60,7 +62,7 @@ export default function DropdownMenu(props) {
       border: "1px solid #d3d4d5"
     }
   })(props => (
-    <Paper className={classes.menuContainer}>
+    <Paper>
       <MenuList elevation={0} {...props} />
     </Paper>
   ));
