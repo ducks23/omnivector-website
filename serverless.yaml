@@ -88,8 +88,8 @@ resources:
       Type: AWS::CloudFront::Distribution
       Properties:
         DistributionConfig:
-         #Aliases:
-         #   - staging.peopledatalabs.com
+          Aliases:
+            - ${self:provider.stage}.omnivector.solutions
           Origins:
             - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
               Id: WebApp
@@ -118,10 +118,10 @@ resources:
               Cookies:
                 Forward: none
             ViewerProtocolPolicy: redirect-to-https
-         #ViewerCertificate:
-         #   AcmCertificateArn: "arn:aws:acm:us-east-1:556708831556:certificate/4c5d027d-bc0a-475c-bf28-5766bb4e8a20"
-         #   MinimumProtocolVersion: TLSv1.2_2018
-         #   SslSupportMethod: sni-only
+          ViewerCertificate:
+            AcmCertificateArn: "arn:aws:acm:us-east-1:212021838531:certificate/0f1303d9-c4d6-44e1-973c-398362f1a130"
+            MinimumProtocolVersion: TLSv1.2_2018
+            SslSupportMethod: sni-only
 
   Outputs:
     WebAppS3BucketOutput:
