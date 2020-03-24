@@ -143,7 +143,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "auto"
   },
   selectedItem: {
-    color: theme.palette.primary.light,
+    color: theme.palette.primary.dark,
     opacity: 1
   },
   appBar: {
@@ -347,7 +347,7 @@ export default function Header(props) {
             <Divider variant="middle" classes={{ root: classes.divider }} />
           </div>
           {menuOptions.map((route, index) => (
-            <Fragment>
+            <Fragment key={index}>
               <ListItem
                 onClick={() => [
                   setDrawerOpen(false),
