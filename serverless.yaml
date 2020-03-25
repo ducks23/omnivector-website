@@ -90,6 +90,8 @@ resources:
         DistributionConfig:
           Aliases:
             - ${self:provider.stage}.omnivector.solutions
+            - www.omnivector.solutions
+            - omnivector.solutions
           Origins:
             - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
               Id: WebApp
