@@ -7,7 +7,6 @@ import Service from "./ui/service/Service";
 import { configServiceRoutes } from "../assets/configData/configServiceRoutes";
 import Footer from "../components/ui/footer/Footer";
 import Home from "../components/ui/home/Home";
-import About from "../components/ui/about/About";
 import Deploy from "../components/ui/deploy/Deploy";
 import Services from "../components/ui/service/Services";
 
