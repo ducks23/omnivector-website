@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "5px",
     marginTop: 0,
     color: "white",
-    opacity: 0.8,
+    opacity: 0.7,
     position: "relative",
     top: "-8px"
   }

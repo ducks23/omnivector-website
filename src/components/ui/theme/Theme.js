@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const oslBlue = "#0075b2";
 const oslOrange = "#FF8B00";
@@ -20,15 +20,14 @@ export default createMuiTheme({
     tab: {
       fontFamily: "Ubuntu",
       textTransform: "none",
-      fontWeight: 700,
-      fontSize: "0.5 rem"
+      fontWeight: 700
     },
     deploy: {
       fontFamily: "Ubuntu",
       textTransform: "none",
       fontWeight: 700,
       fontSize: "1 rem",
-      color: "white",
+      color: "white"
     }
   }
-})
+});

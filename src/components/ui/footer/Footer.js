@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
-import { makeStyles } from "@material-ui/core/styles";
+import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 
-import Contact from "../contact/Contact";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -34,6 +34,28 @@ const useStyles = makeStyles(theme => ({
     fontFamily: "Ubuntu",
     fontSize: ".8rem",
     fontWeight: "bold"
+  },
+  openInNew: {
+    fontFamily: "Ubuntu",
+    fontWeight: 800,
+    fontSize: "14px",
+    margin: "8px",
+    color: theme.palette.secondary.main,
+    textDecoration: "none",
+    position: "relative",
+    top: "10px"
+  },
+  discourse: {
+    fontFamily: "Ubuntu",
+    fontWeight: 700,
+    fontSize: "14px",
+    margin: "0 24px",
+    color: theme.palette.secondary.main,
+    opacity: 0.7,
+    height: "36px",
+    textDecoration: "none",
+    position: "relative",
+    top: "-17px"
   }
 }));
 
@@ -46,18 +68,16 @@ const Footer = props => {
         <Grid container justify="center" className={classes.mainContainer}>
           <Grid item className={classes.gridItem}>
             <Grid container direction="column" spacing={1}>
-              <Grid
-                item
-                component={Link}
-                to="/"
-                onClick={() => [
-                  props.setSelectedValue(0),
-                  props.setSelectedIndex(null)
-                ]}
-                className={classes.link}
+              <a
+                href="https://community.omnivector.solutions/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Home
-              </Grid>
+                <div className={classes.discourse}>
+                  Discourse
+                  <OpenInNewIcon className={classes.openInNew} />
+                </div>
+              </a>
             </Grid>
           </Grid>
           <Grid item className={classes.gridItem}>
@@ -256,33 +276,6 @@ const Footer = props => {
               >
                 <span className={classes.deployText}>DEPLOY: </span> Ceph
                 Extended
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={1}>
-              <Grid
-                item
-                component={Link}
-                to="/about"
-                onClick={() => [
-                  props.setSelectedValue(2),
-                  props.setSelectedIndex(null)
-                ]}
-                className={classes.link}
-              >
-                About Us
-              </Grid>
-              <Grid item className={classes.link}>
-                <Contact
-                  buttonPrefix=""
-                  buttonContext="Contact Us"
-                  buttonSuffix=""
-                  subjectPrefix=""
-                  subjectContext=""
-                  subjectSuffix=""
-                  buttonType="text"
-                />
               </Grid>
             </Grid>
           </Grid>
